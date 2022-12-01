@@ -1,6 +1,11 @@
 App.elements = {
    app: document.getElementById("app"),
-   roof: document.createElement("div"),
+   header: {
+      root: document.createElement("div"),
+      hidari: document.createElement("div"),
 
+   },
+   main: {
 
+   }
 }

@@ -1,4 +1,5 @@
 # eshop-vanilla
+
 Progress of the construction of our e-shop in Vanilla JP.
 
 1. Installation
@@ -9,6 +10,7 @@ Progress of the construction of our e-shop in Vanilla JP.
  Create the App
  3 Create PR
  4 Send the PR's link to the reviewer
+
 Notes
 src = source. Place where we keep all our source files (code)
 assets = Where we keep all our assets (images, fonts, etc)

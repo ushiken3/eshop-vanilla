@@ -1,5 +1,17 @@
 App.controllers = {
-    createHeader (){
+    createStaticElements (){
+        console.log("create Static Elements")
+        const els = App.elements
+
+        els.app.style.width = "100%"
+        els.app.style.height = "100%"
+
+        const header = els.header
+        header.root.style.border = "1px solid black"
+
+       
+
+        console.log("static Elements Created")
          
 
     },

@@ -1,5 +1,37 @@
 App.controllers = {
 
+    navigate(to) {
+        history.pushState({page: 1}, null,'?page=$(to)')
+        App.controllers.renderer()
+
+    },
+    renderer(){
+        const searchParams = new URLSearchParams(window.location.search)
+        const currentPage = searchParams.get("page")
+
+        if (currentPage ==="cart") {
+            App.controllers.showCart()
+        } else {
+            App.controllers.showMain()
+        }
+        },
+
+        showMain() {
+            const els = App.elements
+
+            els.cart.root.style.display ="none"
+
+            els.main.root.style.displey ="block"
+        },
+        showCart(){
+            const els = App.elements
+
+            els.main.root.style.display ="none"
+
+            els.cart.root.style.displey ="block"
+
+        },
+
     createHeader() {
         const els = App.elements
 
@@ -20,7 +52,21 @@ App.controllers = {
 
         header.migi.root.style.border = "1px solid black"
         header.migi.root.innerHTML = "migi"
-       
+
+       //temporary button for router
+       const btn =document.createElement("button")
+       btn.innerHTML = "Go to /cart"
+       btn.onclick = () =>{
+        App.controllers.navigate("cart")
+       },
+       header.hidari.root.appendChild(btn)
+       const btn2 = document.createElement("button")
+       btn2.innerHTML = "Go to /main"
+       btn2.onclick = () => {
+        App.controllers.navigate("main")
+       },
+       header.hidari.root.appendChild(btn2)
+
         header.root.appendChild(header.hidari.root)
         header.root.appendChild(header.migi.root)
         els.app.appendChild(header.root)

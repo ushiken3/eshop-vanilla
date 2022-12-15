@@ -1,7 +1,8 @@
 App.controllers = {
 
     navigate(to) {
-        history.pushState({page: 1}, null,'?page=$(to)')
+        history.pushState({page: 1}, null,`?page=${to}`)
+        //`はstringと変数を合体させる時に使う。
         App.controllers.renderer()
 
     },
@@ -21,14 +22,14 @@ App.controllers = {
 
             els.cart.root.style.display ="none"
 
-            els.main.root.style.displey ="block"
+            els.main.root.style.display ="block"
         },
         showCart(){
             const els = App.elements
 
             els.main.root.style.display ="none"
 
-            els.cart.root.style.displey ="block"
+            els.cart.root.style.display ="block"
 
         },
 
@@ -88,6 +89,7 @@ App.controllers = {
     createCart() {
         const els = App.elements
 
+        els.cart.root.style.display ="none"
         els.cart.root.style.border ="1px solid black"
         els.cart.root.innerHTML = "cart"
         els.cart.root.style.flexGrow =1
@@ -118,7 +120,7 @@ App.controllers = {
         
         App.controllers.createHeader()
         App.controllers.createMain()
-        // App.controllers.createCart()
+        App.controllers.createCart()
         App.controllers.createFooter()
         console.log("static Elements Created")
 

@@ -1,3 +1,8 @@
 App.state = {
+  products:[
+{
     
+}
+
+  ]
 }

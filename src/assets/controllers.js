@@ -16,6 +16,39 @@ App.controllers = {
             App.controllers.showMain()
         }
         },
+        card(){
+            const el = document.createElement("div")
+
+            el.style.border = "1px solid black"
+
+            //image//
+            const img = document.createElement("img")
+
+            //title//
+            const title = document.createElement("div")
+
+            //price//
+            const price = document.createElement("div")
+
+            //description//
+            const desc = document.createElement("div")
+
+            //action button//
+            const btn = document.createElement("button")
+            btn.innerHTML = "Add to cart"
+
+            el.appendChild(img)
+            el.appendChild(title)
+            el.appendChild(price)
+            el.appendChild(desc)
+            el.appendChild(btn)
+
+
+
+            return el
+
+
+        },
 
         showMain() {
             const els = App.elements
@@ -23,6 +56,11 @@ App.controllers = {
             els.cart.root.style.display ="none"
 
             els.main.root.style.display ="block"
+
+            const card = App.controllers.card()
+
+           
+            els.main.root.appendChild(card)
         },
         showCart(){
             const els = App.elements

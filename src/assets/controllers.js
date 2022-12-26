@@ -76,8 +76,7 @@ App.controllers = {
 
             cardContainer.style.flexWrap ="wrap"
 
- 
-                cardContainer.innerHTML=""
+                els.main.root.innerHTML=""
                 els.main.root.appendChild(cardContainer)
                 App.state.products.forEach((product) =>{
                     const card = App.controllers.card(product)                    

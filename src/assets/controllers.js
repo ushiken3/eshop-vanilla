@@ -16,22 +16,33 @@ App.controllers = {
             App.controllers.showMain()
         }
         },
-        card(){
+        card(product){
+
+
             const el = document.createElement("div")
 
             el.style.border = "1px solid black"
 
             //image//
             const img = document.createElement("img")
+            img.src= product.Image
+            img.style.maxHeight="300px"
+            img.style.maxWidth="300px"
+            img.style.borderRadius="50%"
+            
+
 
             //title//
             const title = document.createElement("div")
+            title.innerHTML = product.name
 
             //price//
             const price = document.createElement("div")
+            price.innerHTML = product.price
 
             //description//
             const desc = document.createElement("div")
+            desc.innerHTML = product.description
 
             //action button//
             const btn = document.createElement("button")
@@ -57,10 +68,30 @@ App.controllers = {
 
             els.main.root.style.display ="block"
 
-            const card = App.controllers.card()
+            els.main.root.style.background ="gray"
+
+            const cardContainer = document.createElement("div")
+
+            cardContainer.style.display ="flex"
+
+            cardContainer.style.flexWrap ="wrap"
+
+ 
+                cardContainer.innerHTML=""
+                els.main.root.appendChild(cardContainer)
+                App.state.products.forEach((product) =>{
+                    const card = App.controllers.card(product)                    
+                    cardContainer.appendChild(card)
+                    })
 
            
-            els.main.root.appendChild(card)
+            
+            
+
+
+           
+          
+    
         },
         showCart(){
             const els = App.elements

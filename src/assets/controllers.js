@@ -16,6 +16,18 @@ App.controllers = {
             App.controllers.showMain()
         }
         },
+
+        updateCart(){
+            const el = App.elements.header.migi.root
+
+            let total =0
+
+            App.state.cart.forEach((product) => {
+                total += product.price
+            })
+
+            el.innerHTML = `${App.state.cart.length} item <br> Total:USD ${total}`
+        },
         card(product){
 
 
@@ -47,6 +59,13 @@ App.controllers = {
             //action button//
             const btn = document.createElement("button")
             btn.innerHTML = "Add to cart"
+
+            btn.onclick = () => {
+
+            App.state.cart.push(product)
+
+            App.controllers.updateCart()
+            }
 
             el.appendChild(img)
             el.appendChild(title)

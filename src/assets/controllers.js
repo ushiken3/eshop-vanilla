@@ -28,7 +28,7 @@ App.controllers = {
 
             el.innerHTML = `${App.state.cart.length} item <br> Total:USD ${total}`
         },
-        card(product){
+        card(product, dokokara){
 
 
             const el = document.createElement("div")
@@ -61,10 +61,27 @@ App.controllers = {
             btn.innerHTML = "Add to cart"
 
             btn.onclick = () => {
+                if(dokokara ==="main"){
 
             App.state.cart.push(product)
+                } else if (dokokara ==="cart"){
+
+                    //Search the product in the cart
+                    const idx = App.state.cart.findIndex((p) => p.id === product.id)
+
+                    //remove from state
+                    App.state.cart.splice(idx,1)
+
+                    App.controllers.showCart()
+                }
 
             App.controllers.updateCart()
+            }
+
+            if (dokokara === "main") {
+                btn.innerHTML = "Add to cart"
+            } else if (dokokara === "cart"){
+                btn.innerHTML = "Remove from cart"
             }
 
             el.appendChild(img)
@@ -89,32 +106,54 @@ App.controllers = {
 
             els.main.root.style.background ="gray"
 
-            const cardContainer = document.createElement("div")
-
-            cardContainer.style.display ="flex"
-
-            cardContainer.style.flexWrap ="wrap"
+            const container = document.createElement("div")
+            container.style.display ="flex"
+            container.style.gap ="85px"
+            container.style.flexWrap ="wrap"
 
                 els.main.root.innerHTML=""
-                els.main.root.appendChild(cardContainer)
+                els.main.root.appendChild(container)
                 App.state.products.forEach((product) =>{
-                    const card = App.controllers.card(product)                    
-                    cardContainer.appendChild(card)
+                    const card = App.controllers.card(product, "main")                    
+                    container.appendChild(card)
                     })
 
-           
-            
-            
-
-
-           
-          
+      
     
         },
         showCart(){
             const els = App.elements
 
             els.main.root.style.display ="none"
+
+            els.cart.root.innerHTML = ""
+
+            const titleContainer = document.createElement("div")
+            const title = document.createElement("div")
+
+            title.innerHTML = `My cart [Total Amount : ${App.state.cart.length}]`
+            title.style.fontFamily = "Roboto"
+            title.style.fontStyle = "normal"
+            title.style.fontWeight = "700"
+            title.style.fontSize = "24px"
+            title.style.lineHeight = "29px"
+            title.style.color = "#000000"
+            title.style.textAlign = "center"
+
+            titleContainer.appendChild(title)
+            els.cart.root.appendChild(titleContainer)
+
+            const cartContainer= document.createElement("div")
+            cartContainer.style.display ="flex"
+            cartContainer.style.gap ="85px"
+            cartContainer.style.flexWrap ="wrap"
+
+            App.state.products.forEach((product) =>{
+                    const card = App.controllers.card(product, "cart")                    
+                    cartContainer.appendChild(card)
+                    })
+
+            els.cart.root.appendChild(cartContainer)
 
             els.cart.root.style.display ="block"
 

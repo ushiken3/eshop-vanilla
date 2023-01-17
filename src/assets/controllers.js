@@ -1,5 +1,15 @@
 App.controllers = {
 
+    getCart() {
+        const rawData = localStorage.getItem("cart")
+        if(rawData) {
+            const data = JSON.parse(rawData)
+
+            App.state.cart = data
+            App.controllers.updateCart()
+        }
+    },
+
     navigate(to) {
         history.pushState({ page: 1 }, null, `?page=${to}`)
         //`はstringと変数を合体させる時に使う。
@@ -49,6 +59,7 @@ App.controllers = {
         btn.onclick = () => {
             if (dokokara === "main") {
                 App.state.cart.push(product)
+                localStorage.setItem("cart", JSON.stringify(App.state.cart))
             } else if (dokokara === "cart") {
                 //Search the product in the cart
                 const idx = App.state.cart.findIndex((p) => p.id === product.id)

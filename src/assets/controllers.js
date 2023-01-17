@@ -11,8 +11,8 @@ App.controllers = {
     },
 
     navigate(to) {
-        history.pushState({ page: 1 }, null, `?page=${to}`)
         //`はstringと変数を合体させる時に使う。
+        history.pushState({ page: 1 }, null, `?page=${to}`)        
         App.controllers.renderer()
 
     },
@@ -58,8 +58,7 @@ App.controllers = {
         btn.innerHTML = "Add to cart"
         btn.onclick = () => {
             if (dokokara === "main") {
-                App.state.cart.push(product)
-                localStorage.setItem("cart", JSON.stringify(App.state.cart))
+                App.state.cart.push(product)               
             } else if (dokokara === "cart") {
                 //Search the product in the cart
                 const idx = App.state.cart.findIndex((p) => p.id === product.id)
@@ -67,6 +66,7 @@ App.controllers = {
                 App.state.cart.splice(idx, 1)
                 App.controllers.showCart()
             }
+            localStorage.setItem("cart", JSON.stringify(App.state.cart))
             App.controllers.updateCart()
         }
         if (dokokara === "main") {
@@ -120,7 +120,7 @@ App.controllers = {
         cartContainer.style.display = "flex"
         cartContainer.style.gap = "85px"
         cartContainer.style.flexWrap = "wrap"
-        App.state.products.forEach((product) => {
+        App.state.cart.forEach((product) => {
             const card = App.controllers.card(product, "cart")
             cartContainer.appendChild(card)
         })

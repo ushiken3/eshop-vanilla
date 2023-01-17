@@ -120,7 +120,7 @@ App.controllers = {
         cartContainer.style.display = "flex"
         cartContainer.style.gap = "85px"
         cartContainer.style.flexWrap = "wrap"
-        App.state.products.forEach((product) => {
+        App.state.cart.forEach((product) => {
             const card = App.controllers.card(product, "cart")
             cartContainer.appendChild(card)
         })

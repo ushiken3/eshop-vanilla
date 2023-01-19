@@ -2,7 +2,7 @@ App.controllers = {
 
     getCart() {
         const rawData = localStorage.getItem("cart")
-        if(rawData) {
+        if (rawData) {
             const data = JSON.parse(rawData)
 
             App.state.cart = data
@@ -87,16 +87,25 @@ App.controllers = {
         const els = App.elements
         els.cart.root.style.display = "none"
         els.main.root.style.display = "block"
-        els.main.root.style.background = "gray"
-        const container = document.createElement("div")
-        container.style.display = "flex"
-        container.style.gap = "85px"
-        container.style.flexWrap = "wrap"
+        els.main.bgImg.src = "https://tokubai-news-photo-production.tokubai.co.jp/c/w=1400,h=865,a=2,f=jpg/86a7/e977/d795/8317/1296/fac8/a92a/c7c9/07dac8a84e337c15.jpg"
+        els.main.bgImg.style.width = "1000px"
+        els.main.mContainer.title.innerHTML = "Our products"
+        els.main.mContainer.title.style.textAlign = "center"
+        els.main.mContainer.description.innerHTML = "These fruits will make you happy with these SWEET tastes!!!"
+        els.main.mContainer.description.style.textAlign = "center"
+        els.main.mContainer.products = document.createElement("div")
+        els.main.mContainer.products.style.display = "flex"
+        els.main.mContainer.products.style.gap = "85px"
+        els.main.mContainer.products.style.flexWrap = "wrap"
         els.main.root.innerHTML = ""
-        els.main.root.appendChild(container)
+        els.main.root.appendChild(els.main.bgImg)
+        els.main.root.appendChild(els.main.mContainer.root)
+        els.main.mContainer.root.appendChild(els.main.mContainer.title)
+        els.main.mContainer.root.appendChild(els.main.mContainer.description)
+        els.main.root.appendChild(els.main.mContainer.products)
         App.state.products.forEach((product) => {
             const card = App.controllers.card(product, "main")
-            container.appendChild(card)
+            els.main.mContainer.products.appendChild(card)
         })
     },
 
@@ -135,13 +144,9 @@ App.controllers = {
         header.root.style.display = "flex"
         header.root.style.justifyContent = "space-between"
         header.hidari.root.style.border = "1px solid black"
-        header.hidari.root.innerHTML = "hidari"
-        header.hidari.root.style.border = "1px solid black"
-        header.hidari.root.innerHTML = "hidari"
+        header.hidari.root.innerHTML = "Menu"
         header.migi.root.style.border = "1px solid black"
-        header.migi.root.innerHTML = "migi"
-        header.migi.root.style.border = "1px solid black"
-        header.migi.root.innerHTML = "migi"
+        header.migi.root.innerHTML = "Shopping"
         //temporary button for router
         const btn = document.createElement("button")
         btn.innerHTML = "Go to /cart"

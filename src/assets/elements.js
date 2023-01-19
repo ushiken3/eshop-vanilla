@@ -14,13 +14,10 @@ App.elements = {
    main: {
       root: document.createElement("div"),
       bgImg: document.createElement("img"),
-      productsContainer: {
+      mContainer: {
          root: document.createElement("div"),
-         titele: document.createElement("h1"),
+         title: document.createElement("h1"),
          description: document.createElement("p"),
-         products: {
-            root: document.createElement("div"),
-         },
       },
    },
    cart: {

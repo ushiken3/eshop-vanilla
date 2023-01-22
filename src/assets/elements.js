@@ -4,11 +4,13 @@ App.elements = {
       root: document.createElement("div"),
       hidari: {
          root: document.createElement("div"),
-         img: document.createElement("img"),
+         svg: document.createElementNS("http://www.w3.org/2000/svg", "svg"),
+         path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
       },
       migi: {
          root: document.createElement("div"),
-         img: document.createElement("img"),
+         svg: document.createElementNS("http://www.w3.org/2000/svg", "svg"),
+         path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
       },
    },
    main: {
@@ -18,6 +20,7 @@ App.elements = {
          root: document.createElement("div"),
          title: document.createElement("h1"),
          description: document.createElement("p"),
+         products: document.createElement("div"),
       },
    },
    cart: {

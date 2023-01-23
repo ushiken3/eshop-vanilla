@@ -26,12 +26,14 @@ App.elements = {
    cart: {
       root: document.createElement("div"),
       products: {
-      root: document.createElement("div"),
+         root: document.createElement("div"),
       },
       confirm: document.createElement("button"),
    },
    footer: {
       root: document.createElement("div"),
       img: document.createElement("img"),
+      svg: document.createElementNS("http://www.w3.org/2000/svg", "svg"),
+      path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
    },
 }

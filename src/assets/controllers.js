@@ -7,6 +7,7 @@ App.controllers = {
 
             App.state.cart = data
             App.controllers.updateCart()
+            console.log("get")
         }
     },
 
@@ -47,24 +48,34 @@ App.controllers = {
         //title//
         const title = document.createElement("div")
         title.innerHTML = product.name
+        title.style.textAlign ="center"
         //price//
         const price = document.createElement("div")
         price.innerHTML = product.price
+        price.style.textAlign ="center"
         //description//
         const desc = document.createElement("div")
         desc.innerHTML = product.description
+        desc.style.textAlign ="center"
         //action button//
         const btn = document.createElement("button")
         btn.innerHTML = "Add to cart"
+        btn.style.display ="flex"
+        btn.style.justifyContent ="center"
         btn.onclick = () => {
             if (dokokara === "main") {
                 App.state.cart.push(product)
                 localStorage.setItem("cart", JSON.stringify(App.state.cart))
             } else if (dokokara === "cart") {
                 //Search the product in the cart
+                console.log("uuu",App.state.cart,product.id)
                 const idx = App.state.cart.findIndex((p) => p.id === product.id)
+                console.log("idx",idx)
                 //remove from state
                 App.state.cart.splice(idx, 1)
+                localStorage.removeItem("cart")
+                localStorage.setItem("cart", JSON.stringify(App.state.cart))
+                console.log("splice",App.state.cart)
                 App.controllers.showCart()
             }
             App.controllers.updateCart()
@@ -118,6 +129,7 @@ App.controllers = {
         els.cart.root.innerHTML = ""
         const titleContainer = document.createElement("div")
         const title = document.createElement("div")
+        App.controllers.getCart()
         title.innerHTML = `My cart [Total Amount : ${App.state.cart.length}]`
         title.style.fontFamily = "Roboto"
         title.style.fontStyle = "normal"
@@ -132,12 +144,23 @@ App.controllers = {
         cartContainer.style.display = "flex"
         cartContainer.style.gap = "85px"
         cartContainer.style.flexWrap = "wrap"
+        console.log("aaaa",App.state.cart)
+        let createdId = [] 
         App.state.cart.forEach((product) => {
+            const hasId = App.state.cart.find(element => element.id === product.id)
+
+            console.log("hasId",hasId)
             const card = App.controllers.card(product, "cart")
             cartContainer.appendChild(card)
+            console.log("foreach",product.id)
         })
         els.cart.root.appendChild(cartContainer)
         els.cart.root.style.display = "block"
+        const array1 = [5, 12, 8, 130, 44];
+
+        const found = array1.find(element => element > 1000);
+        console.log("found",found)
+
     },
 
     createHeader() {

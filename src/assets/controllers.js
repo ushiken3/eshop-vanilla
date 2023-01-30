@@ -30,11 +30,14 @@ App.controllers = {
 
     updateCart() {
         const el = App.elements.header.migi.root
+        let totalCount = 0
         let total = 0
         App.state.cart.forEach((product) => {
-            total += product.price
+            total += product.price*product.count
+            totalCount += product.count
+            console.log(product)
         })
-        el.innerHTML = `${App.state.cart.length} item <br> Total:USD ${total}`
+        el.innerHTML = `${totalCount} item <br> Total:USD ${total}`
     },
     card(product, dokokara) {
         const el = document.createElement("div")
@@ -64,14 +67,31 @@ App.controllers = {
         btn.style.justifyContent ="center"
         btn.onclick = () => {
             if (dokokara === "main") {
-                App.state.cart.push(product)
+                const exist = App.state.cart.find((p) => p.id === product.id)
+                if (exist) {
+                    exist.count = exist.count + 1
+                }
+                else{
+                    App.state.cart.push({
+                        ...product, count: 1
+                    })
+                } 
+                console.log("state",App.state.cart)         
                 localStorage.setItem("cart", JSON.stringify(App.state.cart))
             } else if (dokokara === "cart") {
                 //Search the product in the cart
-                console.log("uuu",App.state.cart,product.id)
                 const idx = App.state.cart.findIndex((p) => p.id === product.id)
-                console.log("idx",idx)
                 //remove from state
+                const exist = App.state.cart.find((p) => p.id === product.id)
+                if (exist) {
+                    exist.count = exist.count - 1
+                    console.log("ttt",exist)
+                }
+                else{
+                    App.state.cart.push({
+                        ...product, count: 1
+                    })
+                } 
                 App.state.cart.splice(idx, 1)
                 localStorage.removeItem("cart")
                 localStorage.setItem("cart", JSON.stringify(App.state.cart))
@@ -156,11 +176,6 @@ App.controllers = {
         })
         els.cart.root.appendChild(cartContainer)
         els.cart.root.style.display = "block"
-        const array1 = [5, 12, 8, 130, 44];
-
-        const found = array1.find(element => element > 1000);
-        console.log("found",found)
-
     },
 
     createHeader() {

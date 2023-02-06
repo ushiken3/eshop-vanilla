@@ -68,8 +68,9 @@ App.controllers = {
         btn.onclick = () => {
             if (dokokara === "main") {
                 const exist = App.state.cart.find((p) => p.id === product.id)
-                if (exist) {
-                    exist.count = exist.count + 1
+                console.log("eeee",exist)
+                if (product.count >=1) {
+                    product.count === product.count+1
                 }
                 else{
                     App.state.cart.push({
@@ -83,13 +84,14 @@ App.controllers = {
                 const idx = App.state.cart.findIndex((p) => p.id === product.id)
                 //remove from state
                 const exist = App.state.cart.find((p) => p.id === product.id)
-                if (exist) {
-                    exist.count = exist.count - 1
+                if (product.count >=1 ) {
+                    product.count === product.count-1
                     console.log("ttt",exist)
                 }
                 else{
                     App.state.cart.push({
                         ...product, count: 1
+                        
                     })
                 } 
                 App.state.cart.splice(idx, 1)
@@ -164,7 +166,6 @@ App.controllers = {
         cartContainer.style.display = "flex"
         cartContainer.style.gap = "85px"
         cartContainer.style.flexWrap = "wrap"
-        console.log("aaaa",App.state.cart)
         let createdId = [] 
         App.state.cart.forEach((product) => {
             const hasId = App.state.cart.find(element => element.id === product.id)

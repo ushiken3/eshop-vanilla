@@ -68,8 +68,10 @@ App.controllers = {
         btn.onclick = () => {
             if (dokokara === "main") {
                 const exist = App.state.cart.find((p) => p.id === product.id)
-                console.log("eeee",exist)
-                if (product.count >=1) {
+                const idx = App.state.cart.findIndex((p) => p.id === product.id)
+                console.log("eeee",idx)
+                if (exist) {
+                    idx !== -1 
                     product.count === product.count+1
                 }
                 else{

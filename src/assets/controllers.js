@@ -71,8 +71,8 @@ App.controllers = {
                 const idx = App.state.cart.findIndex((p) => p.id === product.id)
                 console.log("eeee",idx)
                 if (exist) {
-                    idx !== -1 
-                    product.count === product.count+1
+                    idx !== -1
+                    App.state.cart.count = App.state.cart.count+1
                 }
                 else{
                     App.state.cart.push({

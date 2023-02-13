@@ -158,9 +158,7 @@ App.controllers = {
         const title = document.createElement("div")
         App.controllers.getCart()
         let totalCount = 0
-        let total = 0
         App.state.cart.forEach((product) => {
-            total += product.price * product.count
             totalCount += product.count
             console.log(product)
         })

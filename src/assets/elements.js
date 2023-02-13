@@ -4,34 +4,36 @@ App.elements = {
       root: document.createElement("div"),
       hidari: {
          root: document.createElement("div"),
-         img: document.createElement("img"),
+         svg: document.createElementNS("http://www.w3.org/2000/svg", "svg"),
+         path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
       },
       migi: {
          root: document.createElement("div"),
-         img: document.createElement("img"),
+         svg: document.createElementNS("http://www.w3.org/2000/svg", "svg"),
+         path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
       },
    },
    main: {
       root: document.createElement("div"),
       bgImg: document.createElement("img"),
-      productsContainer: {
+      mContainer: {
          root: document.createElement("div"),
-         titele: document.createElement("h1"),
+         title: document.createElement("h1"),
          description: document.createElement("p"),
-         products: {
-            root: document.createElement("div"),
-         },
+         products: document.createElement("div"),
       },
    },
    cart: {
       root: document.createElement("div"),
       products: {
-      root: document.createElement("div"),
+         root: document.createElement("div"),
       },
       confirm: document.createElement("button"),
    },
    footer: {
       root: document.createElement("div"),
       img: document.createElement("img"),
+      svg: document.createElementNS("http://www.w3.org/2000/svg", "svg"),
+      path: document.createElementNS('http://www.w3.org/2000/svg', 'path'),
    },
 }

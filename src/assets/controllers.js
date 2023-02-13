@@ -160,7 +160,7 @@ App.controllers = {
         let totalCount = 0
         App.state.cart.forEach((product) => {
             totalCount += product.count
-            console.log(product)
+            console.log("ghfh",product)
         })
         title.innerHTML = `My cart [Total Amount : ${totalCount}]`
         title.style.fontFamily = "Roboto"

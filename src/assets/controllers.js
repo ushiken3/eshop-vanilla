@@ -33,7 +33,7 @@ App.controllers = {
         let totalCount = 0
         let total = 0
         App.state.cart.forEach((product) => {
-            total += product.price*product.count
+            total += product.price * product.count
             totalCount += product.count
             console.log(product)
         })
@@ -51,55 +51,59 @@ App.controllers = {
         //title//
         const title = document.createElement("div")
         title.innerHTML = product.name
-        title.style.textAlign ="center"
+        title.style.textAlign = "center"
         //price//
         const price = document.createElement("div")
         price.innerHTML = product.price
-        price.style.textAlign ="center"
+        price.style.textAlign = "center"
         //description//
         const desc = document.createElement("div")
         desc.innerHTML = product.description
-        desc.style.textAlign ="center"
+        desc.style.textAlign = "center"
         //action button//
         const btn = document.createElement("button")
         btn.innerHTML = "Add to cart"
-        btn.style.display ="flex"
-        btn.style.justifyContent ="center"
+        btn.style.display = "flex"
+        btn.style.justifyContent = "center"
         btn.onclick = () => {
             if (dokokara === "main") {
                 const exist = App.state.cart.find((p) => p.id === product.id)
                 const idx = App.state.cart.findIndex((p) => p.id === product.id)
-                console.log("eeee",idx)
+                console.log("eeee", idx)
                 if (exist) {
-                    App.state.cart[idx].count =  App.state.cart[idx].count+1
+                    App.state.cart[idx].count = App.state.cart[idx].count + 1
                 }
-                else{
+                else {
                     App.state.cart.push({
                         ...product, count: 1
                     })
-                } 
-                console.log("state",App.state.cart)         
+                }
+                console.log("state", App.state.cart)
                 localStorage.setItem("cart", JSON.stringify(App.state.cart))
             } else if (dokokara === "cart") {
                 //Search the product in the cart
                 const idx = App.state.cart.findIndex((p) => p.id === product.id)
                 //remove from state
                 const exist = App.state.cart.find((p) => p.id === product.id)
-                if (exist ) {
-                    App.state.cart[idx].count =  App.state.cart[idx].count-1
-                    console.log("ttt",exist)
+                if (exist) {
+                    App.state.cart[idx].count = App.state.cart[idx].count - 1
+                    console.log("ttt", exist)
                 }
-                else{
+                else {
                     App.state.cart.push({
                         ...product, count: 1
-                        
+
                     })
-                } 
-                App.state.cart.splice(idx, 1)
-                localStorage.removeItem("cart")
-                localStorage.setItem("cart", JSON.stringify(App.state.cart))
-                console.log("splice",App.state.cart)
-                App.controllers.showCart()
+                }
+                if (App.state.cart[idx].count === 0) {
+                    App.state.cart.splice(idx, 1)
+                    localStorage.removeItem("cart")
+                    localStorage.setItem("cart", JSON.stringify(App.state.cart))
+                    console.log("splice", App.state.cart)
+                    App.controllers.showCart()
+
+                }
+
             }
             App.controllers.updateCart()
         }
@@ -153,7 +157,14 @@ App.controllers = {
         const titleContainer = document.createElement("div")
         const title = document.createElement("div")
         App.controllers.getCart()
-        title.innerHTML = `My cart [Total Amount : ${App.state.cart.length}]`
+        let totalCount = 0
+        let total = 0
+        App.state.cart.forEach((product) => {
+            total += product.price * product.count
+            totalCount += product.count
+            console.log(product)
+        })
+        title.innerHTML = `My cart [Total Amount : ${totalCount}]`
         title.style.fontFamily = "Roboto"
         title.style.fontStyle = "normal"
         title.style.fontWeight = "700"
@@ -167,14 +178,12 @@ App.controllers = {
         cartContainer.style.display = "flex"
         cartContainer.style.gap = "85px"
         cartContainer.style.flexWrap = "wrap"
-        let createdId = [] 
         App.state.cart.forEach((product) => {
             const hasId = App.state.cart.find(element => element.id === product.id)
-
-            console.log("hasId",hasId)
+            console.log("hasId", hasId)
             const card = App.controllers.card(product, "cart")
             cartContainer.appendChild(card)
-            console.log("foreach",product.id)
+            console.log("foreach", product.id)
         })
         els.cart.root.appendChild(cartContainer)
         els.cart.root.style.display = "block"
@@ -185,10 +194,10 @@ App.controllers = {
         const header = els.header
         header.root.style.border = "1px solid black"
         header.root.style.display = "flex"
-        header.root.style.justifyContent = "space-between"   
+        header.root.style.justifyContent = "space-between"
         header.hidari.svg.setAttribute("width", "48px")
         header.hidari.svg.setAttribute("height", "36px")
-        header.hidari.path.setAttribute("d","M23.25 17.35V11.2h-6.2v-3h6.2V2.05h3V8.2h6.15v3h-6.15v6.15ZM14.5 44q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55Q13 36.8 14.5 36.8q1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55Q16 44 14.5 44Zm20.2 0q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55 1.05-1.05 2.55-1.05 1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55Q36.2 44 34.7 44ZM14.5 33.65q-2.1 0-3.075-1.7-.975-1.7.025-3.45l3.05-5.55L7 7H3.1V4h5.8l8.5 18.2H32l7.8-14 2.6 1.4-7.65 13.85q-.45.85-1.225 1.3-.775.45-1.825.45h-15l-3.1 5.45h24.7v3Z")
+        header.hidari.path.setAttribute("d", "M23.25 17.35V11.2h-6.2v-3h6.2V2.05h3V8.2h6.15v3h-6.15v6.15ZM14.5 44q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55Q13 36.8 14.5 36.8q1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55Q16 44 14.5 44Zm20.2 0q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55 1.05-1.05 2.55-1.05 1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55Q36.2 44 34.7 44ZM14.5 33.65q-2.1 0-3.075-1.7-.975-1.7.025-3.45l3.05-5.55L7 7H3.1V4h5.8l8.5 18.2H32l7.8-14 2.6 1.4-7.65 13.85q-.45.85-1.225 1.3-.775.45-1.825.45h-15l-3.1 5.45h24.7v3Z")
         header.hidari.root.appendChild(header.hidari.svg)
         header.hidari.svg.appendChild(header.hidari.path)
         header.migi.root.style.border = "1px solid black"
@@ -207,7 +216,7 @@ App.controllers = {
             App.controllers.navigate("main")
         },
             header.hidari.root.appendChild(btn2)
-        header.root.appendChild(header.hidari.root)    
+        header.root.appendChild(header.hidari.root)
         header.root.appendChild(header.migi.root)
         els.app.appendChild(header.root)
     },
@@ -215,7 +224,7 @@ App.controllers = {
 
     createMain() {
         const els = App.elements
-      
+
         els.main.root.innerHTML = "body"
         els.main.root.style.flexGrow = 1
         els.app.appendChild(els.main.root)
@@ -236,7 +245,7 @@ App.controllers = {
         els.footer.root.style.textAlign = "center"
         els.footer.svg.setAttribute("width", "48px")
         els.footer.svg.setAttribute("height", "36px")
-        els.footer.path.setAttribute("d","M23.25 17.35V11.2h-6.2v-3h6.2V2.05h3V8.2h6.15v3h-6.15v6.15ZM14.5 44q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55Q13 36.8 14.5 36.8q1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55Q16 44 14.5 44Zm20.2 0q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55 1.05-1.05 2.55-1.05 1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55Q36.2 44 34.7 44ZM14.5 33.65q-2.1 0-3.075-1.7-.975-1.7.025-3.45l3.05-5.55L7 7H3.1V4h5.8l8.5 18.2H32l7.8-14 2.6 1.4-7.65 13.85q-.45.85-1.225 1.3-.775.45-1.825.45h-15l-3.1 5.45h24.7v3Z")
+        els.footer.path.setAttribute("d", "M23.25 17.35V11.2h-6.2v-3h6.2V2.05h3V8.2h6.15v3h-6.15v6.15ZM14.5 44q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55Q13 36.8 14.5 36.8q1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55Q16 44 14.5 44Zm20.2 0q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55 1.05-1.05 2.55-1.05 1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55Q36.2 44 34.7 44ZM14.5 33.65q-2.1 0-3.075-1.7-.975-1.7.025-3.45l3.05-5.55L7 7H3.1V4h5.8l8.5 18.2H32l7.8-14 2.6 1.4-7.65 13.85q-.45.85-1.225 1.3-.775.45-1.825.45h-15l-3.1 5.45h24.7v3Z")
         els.footer.root.appendChild(els.footer.svg)
         els.footer.svg.appendChild(els.footer.path)
         els.app.appendChild(els.footer.root)
